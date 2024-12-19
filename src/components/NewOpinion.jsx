@@ -1,7 +1,12 @@
 import { useActionState } from "react";
 
+import { use } from "react";
+import { OpinionsContext } from "../store/opinions-context";
+
 export function NewOpinion() {
-  function shareOpinionAction(prevState, formData) {
+  const { addOpinion } = use(OpinionsContext);
+
+  async function shareOpinionAction(prevState, formData) {
     const userName = formData.get("userName");
     const title = formData.get("title");
     const body = formData.get("body");
@@ -31,14 +36,14 @@ export function NewOpinion() {
       };
     }
 
-    // submit it to the backend
+    await addOpinion({ userName, title, body });
 
     return {
       errors: null,
     };
   }
 
-  const [state, formAction] = useActionState(shareOpinionAction, {
+  const [state, formAction, pending] = useActionState(shareOpinionAction, {
     errors: null,
   });
 
@@ -53,6 +58,7 @@ export function NewOpinion() {
               type="text"
               id="userName"
               name="userName"
+              disabled={pending}
               defaultValue={state.enteredValues?.userName}
             />
           </p>
@@ -63,6 +69,7 @@ export function NewOpinion() {
               type="text"
               id="title"
               name="title"
+              disabled={pending}
               defaultValue={state.enteredValues?.title}
             />
           </p>
@@ -73,6 +80,7 @@ export function NewOpinion() {
             id="body"
             name="body"
             rows={5}
+            disabled={pending}
             defaultValue={state.enteredValues?.body}
           ></textarea>
         </p>
@@ -84,6 +92,8 @@ export function NewOpinion() {
             ))}
           </ul>
         )}
+
+        {pending && <p>Saving...</p>}
 
         <p className="actions">
           <button type="submit">Submit</button>
