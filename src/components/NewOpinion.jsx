@@ -2,6 +2,7 @@ import { useActionState } from "react";
 
 import { use } from "react";
 import { OpinionsContext } from "../store/opinions-context";
+import Submit from "./Submit";
 
 export function NewOpinion() {
   const { addOpinion } = use(OpinionsContext);
@@ -43,7 +44,7 @@ export function NewOpinion() {
     };
   }
 
-  const [state, formAction, pending] = useActionState(shareOpinionAction, {
+  const [state, formAction] = useActionState(shareOpinionAction, {
     errors: null,
   });
 
@@ -58,7 +59,7 @@ export function NewOpinion() {
               type="text"
               id="userName"
               name="userName"
-              disabled={pending}
+              // disabled={pending}
               defaultValue={state.enteredValues?.userName}
             />
           </p>
@@ -69,7 +70,7 @@ export function NewOpinion() {
               type="text"
               id="title"
               name="title"
-              disabled={pending}
+              // disabled={pending}
               defaultValue={state.enteredValues?.title}
             />
           </p>
@@ -80,7 +81,7 @@ export function NewOpinion() {
             id="body"
             name="body"
             rows={5}
-            disabled={pending}
+            // disabled={pending}
             defaultValue={state.enteredValues?.body}
           ></textarea>
         </p>
@@ -93,11 +94,9 @@ export function NewOpinion() {
           </ul>
         )}
 
-        {pending && <p>Saving...</p>}
+        {/* {pending && <p>Saving...</p>} */}
 
-        <p className="actions">
-          <button type="submit">Submit</button>
-        </p>
+        <Submit />
       </form>
     </div>
   );
