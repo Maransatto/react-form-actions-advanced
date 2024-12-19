@@ -2,21 +2,21 @@
   "opinions": [
     {
       "id": 1734587506635,
-      "votes": 1,
+      "votes": 5,
       "userName": "arst",
       "title": "arstars",
       "body": "arstarstarstars"
     },
     {
       "id": 1734587093429,
-      "votes": 1,
+      "votes": 2,
       "userName": "Fernando",
       "title": "new title again",
       "body": "a0/987ars/tyuoienoienars en"
     },
     {
       "id": 1734586984272,
-      "votes": 0,
+      "votes": 3,
       "userName": "Fernando",
       "title": "New Comment",
       "body": "this one with async await"
